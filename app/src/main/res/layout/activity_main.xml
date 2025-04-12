@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
@@ -39,20 +29,20 @@
         android:autofillHints="emailAddress"
         android:ems="10"
         android:inputType="text"
-        android:text="@string/Cr"
+        android:hint="@string/Cr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/editTextTextPassword"
         android:layout_width="326dp"
         android:layout_height="48dp"
         android:autofillHints="password"
         android:ems="10"
-        android:inputType="text"
-        android:text="@string/Ct"
+        android:hint="@string/Ct"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
@@ -60,6 +50,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.61" />
 
+    <ImageView
+        android:id="@+id/imageViewToggle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/cerrado"
+        android:contentDescription="Mostrar contraseña"
+        app:layout_constraintTop_toTopOf="@id/editTextTextPassword"
+        app:layout_constraintBottom_toBottomOf="@id/editTextTextPassword"
+        app:layout_constraintEnd_toEndOf="@id/editTextTextPassword"
+        android:layout_marginEnd="8dp"
+    />
+
+    <!-- Boton Login-->
     <Button
         android:id="@+id/button"
         android:layout_width="177dp"
@@ -72,6 +75,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.742" />
 
+    <!-- Boton Registrarse-->
     <Button
         android:id="@+id/button2"
         android:layout_width="177dp"
@@ -83,5 +87,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.841" />
+
+    <TextView
+        android:id="@+id/registro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrate Aqui"
+        android:textColor="@color/material_dynamic_primary40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.912" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
