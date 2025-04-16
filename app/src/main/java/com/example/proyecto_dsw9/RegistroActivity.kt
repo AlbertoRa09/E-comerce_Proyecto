@@ -12,7 +12,7 @@ class RegistroActivity : AppCompatActivity() {
     private var passwordVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.registro)
+        setContentView(R.layout.activity_registro)
 
         // Mostrar/ocultar contraseña Login
         val editTextPassword1 = findViewById<EditText>(R.id.editTextTextPassword1)

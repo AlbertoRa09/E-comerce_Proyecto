@@ -25,6 +25,15 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Navegar a la pantalla de home
+        val textViewSkibidi = findViewById<TextView>(R.id.textView11)
+
+        textViewSkibidi.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+
         // Navegar a la pantalla de registro
 
         val textViewRegistro = findViewById<TextView>(R.id.registro)
