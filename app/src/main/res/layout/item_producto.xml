@@ -1,40 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:elevation="4dp"
-    app:cardCornerRadius="8dp">
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:gravity="center_horizontal">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        android:gravity="center_horizontal">
+    <FrameLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp">
 
         <ImageView
             android:id="@+id/imageProducto"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/laptop"
-        android:contentDescription="Imagen producto"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen del producto" />
 
-        <TextView
-            android:id="@+id/textNombreProducto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Producto"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
-            android:maxLines="1"/>
+        <ImageButton
+            android:id="@+id/btnAgregarCarrito"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="4dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_carrito"
+            android:contentDescription="Agregar al carrito"
+            android:scaleType="centerInside"
+            />
+    </FrameLayout>
 
-    </LinearLayout>
-
-
-</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/textNombreProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del producto"
+        android:textSize="14sp"
+        android:layout_marginTop="6dp"
+        android:textAlignment="center"
+        android:maxLines="2"
+        android:gravity="center"/>
+</LinearLayout>

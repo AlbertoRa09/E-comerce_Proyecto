@@ -3,6 +3,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.content.Intent
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 
 class HomeActivity : AppCompatActivity() {
@@ -42,26 +45,29 @@ class HomeActivity : AppCompatActivity() {
 //            }
 //        })
 //
-//        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-//        bottomNav.setOnNavigationItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.nav_home -> {
-//                    // Ya estás en Home
-//                    true
-//                }
-//                R.id.nav_carrito -> {
-//                    val intent = Intent(this, CarritoActivity::class.java)
-//                    startActivity(intent)
-//                    true
-//                }
-//                R.id.nav_perfil -> {
-//                    val intent = Intent(this, PerfilActivity::class.java)
-//                    startActivity(intent)
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNav.selectedItemId = R.id.nav_home
+        bottomNav.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Ya estás en Home
+                    true
+                }
+                R.id.nav_carrito -> {
+                    val intent = Intent(this, CarritoActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_perfil -> {
+                    val intent = Intent(this, PerfilActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+
+
 
 
     }
