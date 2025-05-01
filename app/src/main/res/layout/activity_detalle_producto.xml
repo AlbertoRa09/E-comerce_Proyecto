@@ -1,0 +1,97 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollDetalle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Imagen del producto -->
+        <ImageView
+            android:id="@+id/ivImagenDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen del producto"
+            android:src="@drawable/ic_launcher_foreground" />
+
+        <!-- Nombre del producto -->
+        <TextView
+            android:id="@+id/tvNombreDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Producto"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp" />
+
+        <!-- Marca del producto -->
+        <TextView
+            android:id="@+id/txtMarca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marca"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Categoría del producto -->
+        <TextView
+            android:id="@+id/txtCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría"
+            android:textSize="18sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Mostrar la cantidad disponible -->
+        <TextView
+            android:id="@+id/txtCantidadDisponible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad disponible: 10"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Precio -->
+        <TextView
+            android:id="@+id/tvPrecioDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_green_dark"
+            android:layout_marginTop="12dp" />
+
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción del producto..."
+            android:textSize="16sp"
+            android:layout_marginTop="12dp" />
+
+        <!-- Selección de cantidad a agregar -->
+        <NumberPicker
+            android:id="@+id/npCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:value="1"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center"/>
+
+        <!-- Botón Añadir al carrito -->
+        <Button
+            android:id="@+id/btnAgregarCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Añadir al carrito"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

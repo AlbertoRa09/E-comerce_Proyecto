@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:gravity="center_vertical">
 
+    <!-- Imagen del producto -->
     <ImageView
         android:id="@+id/imageProducto"
         android:layout_width="64dp"
@@ -14,10 +15,21 @@
         android:layout_marginEnd="16dp"
         android:contentDescription="Imagen del producto" />
 
+    <!-- Nombre del producto -->
     <TextView
         android:id="@+id/textNombreProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre del producto"
         android:textSize="16sp" />
+
+    <!-- Botón para eliminar -->
+    <ImageView
+        android:id="@+id/imageEliminar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/trash"
+    android:contentDescription="Eliminar producto"
+    android:layout_marginStart="16dp"
+    android:layout_gravity="center_vertical" />
 </LinearLayout>
