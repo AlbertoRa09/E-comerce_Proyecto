@@ -8,25 +8,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.Intent
 
-
 class CarritoActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CarritoAdapter
+    private lateinit var totalTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrito)
 
         recyclerView = findViewById(R.id.recyclerViewCarrito)
+        totalTextView = findViewById(R.id.textTotal)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Lista simulada del carrito (puedes usar una lista compartida para manejarlo de forma real)
+        // Obtener los productos del carrito
         val productosCarrito = CarritoManager.obtenerProductos()
 
-        adapter = CarritoAdapter(productosCarrito)
+        // Establecer el adaptador con el manejo de clics para eliminar productos
+        adapter = CarritoAdapter(productosCarrito.toMutableList()) { producto ->
+            eliminarProductoDelCarrito(producto)
+        }
         recyclerView.adapter = adapter
 
+        // Calcular y mostrar el total del carrito
+        actualizarTotal()
+
+        // Configuración del BottomNavigation
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.selectedItemId = R.id.nav_carrito
 
@@ -48,7 +56,21 @@ class CarritoActivity : AppCompatActivity() {
         }
     }
 
+    // Método para eliminar un producto del carrito
+    private fun eliminarProductoDelCarrito(producto: Producto) {
+        // Eliminar el producto del carrito
+        CarritoManager.eliminarProducto(producto)
+        // Actualizar la lista del adaptador
+        val productosCarrito = CarritoManager.obtenerProductos()
+        adapter.actualizarLista(productosCarrito)
+        // Actualizar el total del carrito
+        actualizarTotal()
+    }
 
-
-
+    // Método para actualizar el total del carrito
+    private fun actualizarTotal() {
+        val productosCarrito = CarritoManager.obtenerProductos()
+        val total = productosCarrito.sumOf { it.precio }
+        totalTextView.text = "Total: $${"%.2f".format(total)}"
+    }
 }
