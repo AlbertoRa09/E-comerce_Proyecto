@@ -57,7 +57,15 @@ class CarritoActivity : AppCompatActivity() {
 
         btnRealizarCompra.setOnClickListener {
             val total = calcularTotal()
-            realizarCompra(usuarioId = 5, total = total, context = this)
+
+            if (total > 0.0) {
+                val intent = Intent(this, PagoActivity::class.java)
+                intent.putExtra("TOTAL", total)
+                intent.putExtra("USUARIO_ID", 5) // ID fijo por ahora
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "El carrito está vacío", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
