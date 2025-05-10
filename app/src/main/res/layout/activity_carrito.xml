@@ -36,14 +36,21 @@
         android:textAlignment="center"
         android:layout_gravity="center" />
 
+    <Button
+        android:id="@+id/btnRealizarCompra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Realizar compra"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/black"
+        android:textColor="@android:color/white" />
+
+
     <!-- Barra de navegación inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
         app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/black"
-        app:labelVisibilityMode="labeled" />
+        android:layout_marginTop="8dp" />
 </LinearLayout>

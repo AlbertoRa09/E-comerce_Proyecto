@@ -1,18 +1,25 @@
 package com.example.proyecto_dsw9
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.content.Intent
+import org.json.JSONObject
 
 class CarritoActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CarritoAdapter
     private lateinit var totalTextView: TextView
+    private lateinit var btnRealizarCompra: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,57 +27,83 @@ class CarritoActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerViewCarrito)
         totalTextView = findViewById(R.id.textTotal)
+        btnRealizarCompra = findViewById(R.id.btnRealizarCompra)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Obtener los productos del carrito
-        val productosCarrito = CarritoManager.obtenerProductos()
-
-        // Establecer el adaptador con el manejo de clics para eliminar productos
-        adapter = CarritoAdapter(productosCarrito.toMutableList()) { producto ->
-            eliminarProductoDelCarrito(producto)
+        adapter = CarritoAdapter(CarritoManager.obtenerProductos().toMutableList()) {
+            actualizarTotal()
         }
-        recyclerView.adapter = adapter
 
-        // Calcular y mostrar el total del carrito
+
+        recyclerView.adapter = adapter
         actualizarTotal()
 
-        // Configuración del BottomNavigation
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.selectedItemId = R.id.nav_carrito
-
-        bottomNav.setOnNavigationItemSelectedListener { item ->
+        bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
+                R.id.nav_carrito -> true
                 R.id.nav_home -> {
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, HomeActivity::class.java))
                     true
                 }
-                R.id.nav_carrito -> true // ya estamos aquí
                 R.id.nav_perfil -> {
-                    val intent = Intent(this, PerfilActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, PerfilActivity::class.java))
                     true
                 }
                 else -> false
             }
         }
+
+        btnRealizarCompra.setOnClickListener {
+            val total = calcularTotal()
+            realizarCompra(usuarioId = 5, total = total, context = this)
+        }
     }
 
-    // Método para eliminar un producto del carrito
     private fun eliminarProductoDelCarrito(producto: Producto) {
-        // Eliminar el producto del carrito
         CarritoManager.eliminarProducto(producto)
-        // Actualizar la lista del adaptador
         val productosCarrito = CarritoManager.obtenerProductos()
         adapter.actualizarLista(productosCarrito)
-        // Actualizar el total del carrito
         actualizarTotal()
     }
 
-    // Método para actualizar el total del carrito
     private fun actualizarTotal() {
-        val productosCarrito = CarritoManager.obtenerProductos()
-        val total = productosCarrito.sumOf { it.precio }
+        val total = calcularTotal()
         totalTextView.text = "Total: $${"%.2f".format(total)}"
+    }
+
+    private fun calcularTotal(): Double {
+        val productosCarrito = CarritoManager.obtenerProductos()
+        return productosCarrito.sumOf { it.precio }
+    }
+
+    private fun realizarCompra(usuarioId: Long, total: Double, context: Context) {
+        val url = "http://10.0.2.2/registrar_compra.php"
+        val queue = Volley.newRequestQueue(context)
+
+        val jsonBody = JSONObject().apply {
+            put("usuario_id", usuarioId)
+            put("total", total)
+        }
+
+        val request = object : JsonObjectRequest(
+            Method.POST, url, jsonBody,
+            { response ->
+                val success = response.getBoolean("success")
+                val message = response.getString("message")
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                if (success) {
+                    CarritoManager.limpiarCarrito()
+                    adapter.actualizarLista(emptyList())
+                    actualizarTotal()
+                }
+            },
+            { error ->
+                Toast.makeText(context, "Error al realizar la compra", Toast.LENGTH_SHORT).show()
+            }
+        ) {}
+
+        queue.add(request)
     }
 }
