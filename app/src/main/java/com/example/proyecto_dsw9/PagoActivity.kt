@@ -98,7 +98,10 @@ class PagoActivity : AppCompatActivity() {
                 return hashMapOf(
                     "usuario_id" to usuarioId.toString(),
                     "total" to total.toString(),
-                    "numero_tarjeta" to numeroTarjeta
+                    "nombre" to etNombreTitular.text.toString(),
+                    "serial" to etNumeroTarjeta.text.toString(),
+                    "cvv" to etCVV.text.toString(),
+                    "fecha" to etFechaExpiracion.text.toString()
                 )
             }
         }

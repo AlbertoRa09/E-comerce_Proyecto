@@ -78,6 +78,7 @@ class HomeActivity : AppCompatActivity() {
             // Actualizar la lista en el adaptadors
             adapter.actualizarLista(listaProductos)
         }, { error ->
+            Log.e("HomeActivity", "Error al cargar productos: ${error.message}", error)
             Toast.makeText(this, "Error al cargar productos: ${error.message}", Toast.LENGTH_SHORT).show()
         })
 
